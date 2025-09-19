@@ -1,13 +1,21 @@
-version: '3'
 services:
   web:
     build: ./web
     ports:
-      - "8888:8080"
+      - "8888:8080"    
     depends_on:
       - database
-      - cache 
-    database:
-      build: ./database
-    cache:
-      build: ./cache
+      - cache
+    restart: unless-stopped
+
+  database:
+    build: ./database
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: secretpass
+    restart: unless-stopped
+
+  cache:
+    build: ./cache
+    restart: unless-stopped
