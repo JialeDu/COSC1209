@@ -47,7 +47,7 @@ jobs:
           echo "IMAGE_SHA=${REPO}:${SHA}" >> $GITHUB_OUTPUT
 
     - name: Build image
-      run: docker build -t "${{ steps.prep.outputs.IMAGE_LATEST }}" -t "${{ steps.prep.outputs.IMAGE_SHA }}" .
+      run: docker build -f ./Dockerfile -t "${{ steps.prep.outputs.IMAGE_LATEST }}" -t "${{ steps.prep.outputs.IMAGE_SHA }}" .
       working-directory: .
       
     - name: Push image
