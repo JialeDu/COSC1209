@@ -48,7 +48,7 @@ jobs:
 
     - name: Build image
       run: docker build -t "${{ steps.prep.outputs.IMAGE_LATEST }}" -t "${{ steps.prep.outputs.IMAGE_SHA }}" .
-      working-directory: ./my-project-master
+      working-directory: .
       
     - name: Push image
       run: |
