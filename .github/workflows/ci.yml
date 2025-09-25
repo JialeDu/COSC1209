@@ -24,10 +24,12 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
-
+      working-directory: ./my-project-master
+      
     - name: Build with Gradle
       run: ./gradlew build
-
+      working-directory: ./my-project-master
+      
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
@@ -46,7 +48,8 @@ jobs:
 
     - name: Build image
       run: docker build -t "${{ steps.prep.outputs.IMAGE_LATEST }}" -t "${{ steps.prep.outputs.IMAGE_SHA }}" .
-
+      working-directory: ./my-project-master
+      
     - name: Push image
       run: |
           docker push "${{ steps.prep.outputs.IMAGE_LATEST }}"
